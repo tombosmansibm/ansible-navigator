@@ -170,7 +170,7 @@ $  echo my_password >> ~/.vault_password
 $ ln ~/.vault_password .
 # Set the environment variable to the location of the file
 $ ANSIBLE_VAULT_PASSWORD_FILE=.vault_password
-$ ansible-navigator run site.yml --penv ANSIBLE_VAULT_PASSWORD_FILE
+$ ansible-navigator run site.yml
 ```
 
 2. Store the vault password in an environment variable
@@ -183,12 +183,10 @@ $ echo -e '#!/bin/sh\necho ${ANSIBLE_VAULT_PASSWORD}' >> ~/.vault_password.sh
 $ ln ~/.vault_password.sh .
 # The leading space here is necessary to keep the command out of the command history
 # (this depends on the value of the HISTCONTROL environment variable, it needs to be set to ignoreboth or ignorespace !)
-# To pass environment variables to the execution environment, you need to use --penv
-#
-$ export HISTCONTROL=ignoreboth
+# export HISTCONTROL=ignoreboth
 $  export ANSIBLE_VAULT_SECRET=my_password
-# Use vault-id to reference the script file, and pass the environment variable
-$ ansible-navigator run site.yml --penv ANSIBLE_VAULT_SECRET --vault-id ".vault_password.sh"
+# Use vault-id to reference the script file
+$ ansible-navigator run site.yml --vault-id ".vault_password.sh"
 ```
 
 Additional information about `ansible-vault` can be found [here](https://docs.ansible.com/ansible/latest/user_guide/vault.html)
